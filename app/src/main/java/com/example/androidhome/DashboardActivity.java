@@ -24,17 +24,32 @@ public class DashboardActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_view);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
+            boolean userLoggedIn=false;
             switch (id) {
                 case R.id.home:
                     setCurrentFragment(homeFragment);
                     break;
 //
                 case R.id.cart:
-                    setCurrentFragment(cartFragment);
+                    if(userLoggedIn)
+                    {
+                        setCurrentFragment(cartFragment);
+                    }
+                    else {
+                        Intent i = new Intent(DashboardActivity.this, SignupOrLogin.class);
+                        startActivity(i);
+                    }
                     break;
 
                 default:
-                    setCurrentFragment(profileFragment);
+                    if(userLoggedIn)
+                    {
+                        setCurrentFragment(profileFragment);
+                    }
+                    else {
+                        Intent i = new Intent(DashboardActivity.this, SignupOrLogin.class);
+                        startActivity(i);
+                    }
                     break;
             }
             return true;

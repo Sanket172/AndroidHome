@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-public class SplashActivity extends AppCompatActivity {
-
+public class AfterSplash extends AppCompatActivity {
 
     private static int SPLASH_SCREEN_TIME_OUT=1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -25,14 +23,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent i=new Intent(SplashActivity.this,
-                        DashboardActivity.class);
-
+                Intent i=new Intent(AfterSplash.this,
+                        MainActivity.class);
                 startActivity(i);
-
                 finish();
             }
         }, SPLASH_SCREEN_TIME_OUT);
+
+
 
     }
 }

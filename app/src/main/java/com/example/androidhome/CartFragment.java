@@ -41,7 +41,7 @@ public class CartFragment extends Fragment implements CartAdapter.CartDataInterf
         super.onViewCreated(view, savedInstanceState);
         List<CartModel> cartModels=new ArrayList<>();
         generateUserData(cartModels);
-        androidx.recyclerview.widget.RecyclerView recyclerView = view.findViewById(R.id.cart_recycler);
+        androidx.recyclerview.widget.RecyclerView recyclerView = view.findViewById(R.id.cartrecycler);
         CartAdapter cartAdapter=new CartAdapter(cartModels,  CartFragment.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(cartAdapter);

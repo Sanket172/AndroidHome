@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHome">
-        <activity android:name=".SignUpActivity"></activity>
+        <!-- <activity android:name=".AfterSplash"></activity> -->
+        <activity android:name=".SignupOrLogin" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".ProductFullView" />
         <activity
             android:name=".Product"
@@ -22,16 +24,18 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:usesCleartextTraffic="true">
+        <activity android:name=".AfterSplash">
+
+            <!-- android:theme="@style/SplashTheme"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
