@@ -66,4 +66,5 @@ public class DashboardActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.flFragment, fragment);
         fragmentTransaction.commit();
     }
+
 }

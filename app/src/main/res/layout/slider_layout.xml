@@ -8,9 +8,10 @@
     <!--Image we will display is our slider view-->
     <ImageView
         android:id="@+id/myimage"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="800dp"
         android:layout_centerHorizontal="true"
+        android:background="@color/black"
         android:contentDescription="@string/app_name" />
 
 </RelativeLayout>

@@ -23,9 +23,5 @@ public class SignupOrLogin extends AppCompatActivity {
             startActivity(intent);
         });
 
-        findViewById(R.id.skip).setOnClickListener(view ->{
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
-        });
     }
 }
