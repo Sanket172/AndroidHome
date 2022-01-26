@@ -6,24 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.example.androidhome.ani.retrofit.RetrofitBuilder;
-import com.example.androidhome.ani.orderHistory_adapter.OrderHistoryAdapter;
 
 import com.example.androidhome.ani.product_adapter.ProductAdapter;
 import com.example.androidhome.ani.product_model.ProductModel;
-import com.example.androidhome.ani.repository.ProductAPI;
 
-import com.example.androidhome.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class Product extends AppCompatActivity implements ProductAdapter.ProductDataInterface {
 

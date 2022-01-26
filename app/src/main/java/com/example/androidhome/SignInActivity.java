@@ -2,7 +2,9 @@ package com.example.androidhome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,9 +78,13 @@ public class SignInActivity extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+
+            SharedPreferences sharedPreferences = getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+
 
             if (acct != null) {
                 String personName = acct.getDisplayName();
@@ -88,6 +94,10 @@ public class SignInActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("loginchecker", "3");
+                editor.apply();
+                editor.commit();
 
                 Log.d("ABCDEFGH", "User Email :- "+personEmail);
                 Toast.makeText(this, "User ID :- "+personEmail, Toast.LENGTH_SHORT ).show();

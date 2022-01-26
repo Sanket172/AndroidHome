@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHome">
+        <activity android:name=".LoginCheckerActivity"></activity>
         <!-- <activity android:name=".AfterSplash"></activity> -->
         <activity android:name=".SignupOrLogin" />
         <activity android:name=".SignUpActivity" />
@@ -21,7 +22,7 @@
             android:usesCleartextTraffic="true" />
         <activity android:name=".Account" />
         <activity android:name=".OrderHistory" />
-        <activity android:name=".DashboardActivity" >
+        <activity android:name=".DashboardActivity">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -39,7 +40,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />

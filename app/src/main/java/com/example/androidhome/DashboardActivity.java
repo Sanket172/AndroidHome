@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +26,19 @@ public class DashboardActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_view);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            SharedPreferences sharedpreferences = getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+            String j = sharedpreferences.getString("loginchecker", "0");
+
             int id = item.getItemId();
-            boolean userLoggedIn=false;
+            boolean userLoggedIn=true;
             switch (id) {
                 case R.id.home:
                     setCurrentFragment(homeFragment);
                     break;
 //
                 case R.id.cart:
-                    if(userLoggedIn)
+                    if(j.equals("3"))
                     {
                         setCurrentFragment(cartFragment);
                     }
@@ -42,7 +49,7 @@ public class DashboardActivity extends AppCompatActivity {
                     break;
 
                 default:
-                    if(userLoggedIn)
+                    if(j.equals("3"))
                     {
                         setCurrentFragment(profileFragment);
                     }
