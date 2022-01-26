@@ -27,13 +27,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="textPersonName"
-        android:textColor="@color/material_on_primary_emphasis_medium"
-        android:textColorHint="@color/material_on_primary_emphasis_medium"
+        android:textColor="@color/white"
+        android:textColorHint="@color/teal_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerheading" />
+
 
     <EditText
         android:id="@+id/password"
@@ -41,15 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:gravity="left"
         android:hint="Password"
         android:inputType="textPersonName"
-        android:textColor="@color/material_on_primary_emphasis_medium"
-        android:textColorHint="@color/material_on_primary_emphasis_medium"
+        android:textColor="@color/white"
+        android:textColorHint="@color/design_default_color_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
-
-
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"

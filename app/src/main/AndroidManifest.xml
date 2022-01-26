@@ -12,17 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHome">
-        <activity android:name=".ProductFullView"></activity>
-        <activity android:name=".Product"
-            android:usesCleartextTraffic="true"
-            />
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".ProductFullView" />
+        <activity
+            android:name=".Product"
+            android:usesCleartextTraffic="true" />
         <activity android:name=".Account" />
         <activity android:name=".OrderHistory" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:usesCleartextTraffic="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
