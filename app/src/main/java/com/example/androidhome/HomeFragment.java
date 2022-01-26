@@ -17,10 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.androidhome.Adapter.RecyclerViewAdapter;
-import com.example.androidhome.Model.Category;
-import com.example.androidhome.Network.ICategoryAPI;
-import com.example.androidhome.NetworkManager.RetrofitBuilder;
 import com.example.androidhome.ani.product_model.ProductModel;
 import com.example.androidhome.ani.repository.ProductAPI;
 import com.example.androidhome.ani.slider_model.*;
@@ -42,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class HomeFragment extends Fragment implements RecyclerViewAdapter.CategoryInterface, RecommendedAdapter.RecommendedDataInterface {
+public class HomeFragment extends Fragment implements RecommendedAdapter.RecommendedDataInterface {
 
 
     String url1 = "https://images.theconversation.com/files/2982/original/3600947113_fe7208d8a8_b.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip"; // Daru
@@ -175,11 +171,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.Catego
         recommendDataList.add(new Recommended_Model("9", 100, "Marvel's Avengers", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Action Adv", "Sony", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/k6zda4w0/physical-game/x/z/z/standard-marvel-s-avengers-full-game-ps4-original-imafpbedz4dqty47.jpeg?q=70" ));
     }
 
-
-    @Override
-    public void onUserClick(Category category) {
-
-    }
 
 
     @Override

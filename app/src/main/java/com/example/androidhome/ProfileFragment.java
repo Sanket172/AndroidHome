@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidhome.Adapter.RecyclerViewAdapter;
 import com.example.androidhome.Model.Category;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,7 +33,7 @@ import java.util.concurrent.Executor;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment implements RecyclerViewAdapter.CategoryInterface{
+public class ProfileFragment extends Fragment {
 
 
 
@@ -42,10 +41,6 @@ public class ProfileFragment extends Fragment implements RecyclerViewAdapter.Cat
     GoogleSignInClient mGoogleSignInClient;
     DashboardActivity dashboardActivity;
 
-    @Override
-    public void onUserClick(Category category) {
-
-    }
 
     public ProfileFragment() {
         // Required empty public constructor
