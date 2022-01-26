@@ -43,7 +43,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
         holder.rootview.setOnClickListener(view -> {
 
-            recommendedDataInterface.onUserClick(recommended_model);
+            recommendedDataInterface.onUserClick(recommended_model, view, holder.getAdapterPosition());
 
         });
     }
@@ -60,7 +60,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         return new RecommendedAdapter.ViewHolder(view);
     }
     public interface RecommendedDataInterface{
-        void onUserClick(Recommended_Model recommended_model);
+        void onUserClick(Recommended_Model recommended_model, View view,int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

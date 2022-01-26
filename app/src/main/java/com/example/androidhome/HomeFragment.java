@@ -171,12 +171,11 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
         recommendDataList.add(new Recommended_Model("9", 100, "Marvel's Avengers", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Action Adv", "Sony", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/k6zda4w0/physical-game/x/z/z/standard-marvel-s-avengers-full-game-ps4-original-imafpbedz4dqty47.jpeg?q=70" ));
     }
 
-
-
     @Override
-    public void onUserClick(Recommended_Model recommended_model) {
-
+    public void onUserClick(Recommended_Model recommended_model, View view, int position) {
+        startActivity(new Intent(getContext(),Product.class));
     }
+
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {

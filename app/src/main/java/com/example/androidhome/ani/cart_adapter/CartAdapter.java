@@ -40,7 +40,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.quantity.setText(cartModel.getQuantity()+"");
         Glide.with(holder.imgProduct.getContext()).load(cartModel.getImageUrl()).placeholder(R.drawable.ic_baseline_person).into(holder.imgProduct);
         holder.rootview.setOnClickListener(view -> {
-            cartDataInterface.onUserClick(cartModel);
+            cartDataInterface.onUserClick(cartModel, view,holder.getAdapterPosition());
         });
         holder.inc.setOnClickListener(v -> {
             count++;
@@ -62,7 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public interface CartDataInterface{
-        void onUserClick(CartModel cartModel);
+        void onUserClick(CartModel cartModel, View view, int position);
     }
 
     @Override

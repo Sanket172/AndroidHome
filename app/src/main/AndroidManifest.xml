@@ -15,7 +15,7 @@
         <activity android:name=".LoginCheckerActivity"></activity>
         <!-- <activity android:name=".AfterSplash"></activity> -->
         <activity android:name=".SignupOrLogin" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".ani.signupRetro.SignUpActivity" />
         <activity android:name=".ProductFullView" />
         <activity
             android:name=".Product"
@@ -28,7 +28,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".SplashActivity" />
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".ani.loginRetro.SignInActivity" />
         <activity android:name=".AfterSplash">
 
             <!-- android:theme="@style/SplashTheme"> -->

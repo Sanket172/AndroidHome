@@ -1,4 +1,4 @@
-package com.example.androidhome;
+package com.example.androidhome.ani.signupRetro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,9 +9,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.androidhome.DashboardActivity;
+import com.example.androidhome.R;
+import com.example.androidhome.SplashActivity;
+import com.example.androidhome.ani.RetrofitInterfaces.SignupInterface;
+import com.example.androidhome.ani.builder.BuilderSignup;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,16 +26,50 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class SignUpActivity extends AppCompatActivity {
 
 
     GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 100;
 
+    private EditText name, email, password, cpassword, address;
+    private Button signup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+
+        name = findViewById(R.id.reg_name);
+        email = findViewById(R.id.reg_email);
+        password = findViewById(R.id.reg_password);
+        cpassword = findViewById(R.id.reg_rpassword);
+        address = findViewById(R.id.reg_address);
+
+        signup = findViewById(R.id.reg_button);
+
+        signup.setOnClickListener(view -> {
+
+            if (email.getText().toString().isEmpty() && password.getText().toString().isEmpty() && name.getText().toString().isEmpty() &&
+                    cpassword.getText().toString().isEmpty() && address.getText().toString().isEmpty()) {
+                Toast.makeText(SignUpActivity.this, "Please enter all details", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!password.getText().toString().equals(cpassword.getText().toString())){
+                Toast.makeText(SignUpActivity.this, "Enter same password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Log.d("do",email.getText().toString());
+            signupAPI(name.getText().toString(), email.getText().toString(), password.getText().toString(), address.getText().toString());
+
+        });
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -54,6 +94,32 @@ public class SignUpActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    public void signupAPI(String name, String email, String password, String address) {
+
+        Retrofit retrofit = BuilderSignup.getInstance();
+        SignupEntity signupEntity = new SignupEntity(name, email, password, address);
+        SignupInterface signupInterface = retrofit.create(SignupInterface.class);
+
+        Call<Respentity> signupEntityCall = signupInterface.postLog(signupEntity);
+        signupEntityCall.enqueue(new Callback<Respentity>() {
+            @Override
+            public void onResponse(Call<Respentity> call, Response<Respentity> response) {
+                if(response.body()==null){
+                    Toast.makeText(SignUpActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(SignUpActivity.this, "Signin Successful", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SignUp.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+            }
+
+            @Override
+            public void onFailure(Call<Respentity> call, Throwable t) {
+                Toast.makeText(SignUpActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void signIn() {

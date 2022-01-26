@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
+
+import com.example.androidhome.ani.loginRetro.SignInActivity;
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
 

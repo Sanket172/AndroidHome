@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.androidhome.ani.loginRetro.SignInActivity;
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
+
 public class SignupOrLogin extends AppCompatActivity {
 
     @Override

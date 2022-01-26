@@ -1,4 +1,4 @@
-package com.example.androidhome;
+package com.example.androidhome.ani.loginRetro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.androidhome.DashboardActivity;
+import com.example.androidhome.R;
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
+import com.example.androidhome.SplashActivity;
+import com.example.androidhome.ani.builder.BuilderSignup;
+import com.example.androidhome.ani.signupRetro.Respentity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -19,15 +27,42 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import com.example.androidhome.ani.RetrofitInterfaces.LoginInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class SignInActivity extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 100;
+
+    private EditText email,pwd;
+    private Button signin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        email=findViewById(R.id.username);
+        pwd=findViewById(R.id.password);
+        signin=findViewById(R.id.login);
+
+        signin.setOnClickListener(view -> {
+            if(email.getText().toString().isEmpty() && pwd.getText().toString().isEmpty()){
+                Toast.makeText(SignInActivity.this,"Please enter valid details",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            loginAPI(email.getText().toString(),pwd.getText().toString());
+
+        });
+
+        findViewById(R.id.logout).setOnClickListener(view -> {
+            startActivity(new Intent(this, SignUpActivity.class));
+        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -52,6 +87,37 @@ public class SignInActivity extends AppCompatActivity {
             }
 
 
+        });
+
+    }
+
+    public void loginAPI(String mail,String pwd){
+
+        Retrofit retrofit= BuilderSignup.getInstance();
+
+        LoginEntity loginEntity = new LoginEntity(mail,pwd);
+
+        LoginInterface loginInterface = retrofit.create(LoginInterface.class);
+
+        Call<Respentity> loginEntityCall= loginInterface.postLog(loginEntity);
+
+        loginEntityCall.enqueue(new Callback<Respentity>() {
+            @Override
+            public void onResponse(Call<Respentity> call, Response<Respentity> response) {
+                if(response.body()==null){
+                    Toast.makeText(SignInActivity.this,"Wrong username or password",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+                    startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respentity> call, Throwable t) {
+                Toast.makeText(SignInActivity.this,"Wrong username or password",Toast.LENGTH_SHORT).show();
+            }
         });
 
     }
