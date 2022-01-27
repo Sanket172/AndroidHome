@@ -1,6 +1,6 @@
 package com.example.androidhome.ani.product_adapter;
 
-import android.view.LayoutInflater;
+import   android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,36 +11,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.androidhome.R;
-import com.example.androidhome.ani.orderHistory_model.OrderHistoryModel;
-import com.example.androidhome.ani.product_model.ProductModel;
+import com.example.androidhome.ani.productRetro.ProductEntity;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewholder> {
 
-    private final List<ProductModel> productModelList;
+    private final List<ProductEntity> productEntityList;
     private final ProductDataInterface productDataInterface;
 
-    public ProductAdapter(List<ProductModel> productModelList , ProductDataInterface productDataInterface) {
-        this.productModelList = productModelList;
+    public ProductAdapter(List<ProductEntity> productEntityList, ProductDataInterface productDataInterface) {
+        this.productEntityList = productEntityList;
         this.productDataInterface=productDataInterface;
     }
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        ProductModel productModel=productModelList.get(position);
+        ProductEntity productEntity = productEntityList.get(position);
 
 //        holder.productID.setText(productModel.getProductID()+"");
 //        holder.grandTotal.setText(productModel.getGrandTotal()+"");
 
-        holder.productName.setText(productModel.getProductName());
-        holder.attribute1.setText(productModel.getAttribute1());
-        holder.attribute2.setText(productModel.getAttribute2());
-        holder.attribute3.setText(productModel.getAttribute5());
-        holder.attribute4.setText(productModel.getAttribute4());
+        holder.productName.setText(productEntity.getProductName());
+        holder.attribute1.setText(productEntity.getAttribute1());
+        holder.attribute2.setText(productEntity.getAttribute2());
+        holder.attribute3.setText(productEntity.getAttribute5());
+        holder.attribute4.setText(productEntity.getAttribute4());
 
         Glide.with(holder.itemView)
-                .load(productModel.getImageUrl())
+                .load(productEntity.getImage())
                 .fitCenter()
                 .into(holder.productImage);
 
@@ -48,14 +47,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
 //            OrderHistoryDataInterface.onUserClick(orderHistoryModel);
 //        });
         holder.rootview.setOnClickListener(view -> {
-            productDataInterface.onUserClick(productModel);
+            productDataInterface.onUserClick(productEntity);
         });
 
     }
 
     @Override
     public int getItemCount() {
-        return productModelList.size();
+        return productEntityList.size();
     }
 
     @NonNull
@@ -66,7 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
     }
 
     public interface ProductDataInterface{
-        void onUserClick(ProductModel productModel);
+        void onUserClick(ProductEntity productEntity);
     }
     public static class Viewholder extends RecyclerView.ViewHolder{
 
@@ -91,11 +90,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
 //            grandTotal=view.findViewById(R.id.Tamt);
 
             productName = view.findViewById(R.id.product_name);
-            attribute1 = view.findViewById(R.id.Attribute1);
-            attribute2 = view.findViewById(R.id.Attribute2);
-            attribute3 = view.findViewById(R.id.Attribute3);
-            attribute4 = view.findViewById(R.id.Attribute4);
-            productImage = itemView.findViewById(R.id.product_image);
+            attribute1 = view.findViewById(R.id.Attribute10);
+            attribute2 = view.findViewById(R.id.Attribute20);
+            attribute3 = view.findViewById(R.id.Attribute30);
+            attribute4 = view.findViewById(R.id.Attribute40);
+            productImage = itemView.findViewById(R.id.product_image10);
 
 //            text1=view.findViewById(R.id.textID);
 

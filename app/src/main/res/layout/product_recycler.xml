@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/cardview_shadow_start_color"
-    
     android:layout_marginHorizontal="@dimen/cardview_compat_inset_shadow"
     xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -45,12 +44,12 @@
                         app:layout_constraintGuide_end="216dp" />
     
                     <TextView
-                        android:id="@+id/Attribute2"
+                        android:id="@+id/Attribute20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Attribute 2"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/product_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/product_image10"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.072"
                         app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -58,39 +57,39 @@
                         app:layout_constraintVertical_bias="0.819" />
 
                     <TextView
-                        android:id="@+id/Attribute3"
+                        android:id="@+id/Attribute30"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Attribute 3"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/product_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/product_image10"
 
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.892"
                         app:layout_constraintStart_toStartOf="@+id/guideline4"
-                        app:layout_constraintTop_toTopOf="@+id/product_image"
+                        app:layout_constraintTop_toTopOf="@+id/product_image10"
                         app:layout_constraintVertical_bias="0.262" />
 
                     <TextView
-                        android:id="@+id/Attribute4"
+                        android:id="@+id/Attribute40"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Attribute 4"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/product_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/product_image10"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.892"
                         app:layout_constraintStart_toStartOf="@+id/guideline4"
-                        app:layout_constraintTop_toTopOf="@+id/product_image"
+                        app:layout_constraintTop_toTopOf="@+id/product_image10"
                         app:layout_constraintVertical_bias="0.819" />
 
                     <TextView
-                        android:id="@+id/Attribute1"
+                        android:id="@+id/Attribute10"
                         android:layout_width="wrap_content"
                         android:layout_height="19dp"
                         android:textColor="@color/black"
                         android:text="Attribute 1"
-                        app:layout_constraintBottom_toBottomOf="@+id/product_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/product_image10"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.072"
                         app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -98,7 +97,7 @@
                         app:layout_constraintVertical_bias="0.262" />
     
                     <ImageView
-                        android:id="@+id/product_image"
+                        android:id="@+id/product_image10"
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         android:background="#9966ff"

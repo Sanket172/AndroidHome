@@ -3,49 +3,45 @@ package com.example.androidhome;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.androidhome.ani.RetrofitInterfaces.SliderInterface;
+import com.example.androidhome.ani.builder.BuilderSignup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.androidhome.ani.product_model.ProductModel;
-import com.example.androidhome.ani.repository.ProductAPI;
+import com.example.androidhome.ani.productRetro.ProductEntity;
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
 import com.example.androidhome.ani.slider_model.*;
 import com.example.androidhome.ani.slider_adapter.*;
 
 import com.example.androidhome.ani.recommended_model.*;
 import com.example.androidhome.ani.recommended_adapter.*;
 
-import com.example.androidhome.ani.slider_adapter.*;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.androidhome.ani.recommended_adapter.*;
-
 import retrofit2.Call;
+import retrofit2.Retrofit;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class HomeFragment extends Fragment implements RecommendedAdapter.RecommendedDataInterface {
 
 
-    String url1 = "https://images.theconversation.com/files/2982/original/3600947113_fe7208d8a8_b.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip"; // Daru
-    String url2 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQV4PnR4TldWDpedxe0GOT7bz1bU0VI0CbtA&usqp=CAU";   // Game
-    String url3 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaqxg8sKlxVsGdJ3UVvhoHThp43G8kJlpkg&usqp=CAU";  // Cigarattes
-    String url4 = "https://i.ytimg.com/vi/rNzg-_lZZuw/maxresdefault.jpg";    // Food Packet
-    String url5 = "https://image.shutterstock.com/image-vector/various-meds-pills-capsules-blisters-260nw-1409823341.jpg";   // Dava
+    String url3 = "https://images.theconversation.com/files/2982/original/3600947113_fe7208d8a8_b.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip"; // Daru
+    String url1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQV4PnR4TldWDpedxe0GOT7bz1bU0VI0CbtA&usqp=CAU";   // Game
+    String url4 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaqxg8sKlxVsGdJ3UVvhoHThp43G8kJlpkg&usqp=CAU";  // Cigarattes
+    String url5 = "https://i.ytimg.com/vi/rNzg-_lZZuw/maxresdefault.jpg";    // Food Packet
+    String url2 = "https://image.shutterstock.com/image-vector/various-meds-pills-capsules-blisters-260nw-1409823341.jpg";   // Dava
     public String p;
 
     public HomeFragment() {
@@ -112,6 +108,10 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
 //                String s = cname[position];
 //                List<ProductModel> productModelList = generateProductData(s);
 
+                p = String.valueOf(position);
+
+
+
 
 //                if(p.equals("1"))
 //                {
@@ -133,8 +133,11 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
 ////                Intent intent = new Intent(getContext(), GamesShow.class);
 ////                startActivity(intent);
 
+
                 Toast.makeText(getContext(), p+"...", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(getContext(), Product.class);
+                intent.putExtra("categoryName", p);
                 startActivity(intent);
 
             }
@@ -143,6 +146,7 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
 
         List<Recommended_Model> recommended_models = new ArrayList<>();
         generateUserData(recommended_models);
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler1);
         RecommendedAdapter recommendedAdapter = new RecommendedAdapter(recommended_models, HomeFragment.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
@@ -176,65 +180,38 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
         startActivity(new Intent(getContext(),Product.class));
     }
 
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
+//    public void SliderApi(String catName) {
 //
-//
-//    }
-//
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.activity_recycler_view, container, false);
-//        //return inflater.inflate(R.layout.category_view, container, false);
-//
-//    }
-//
-//
-//
-//
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        initApi(view);
-//    }
-//
-//
-//    public void initApi(View view)
-//    {
-//        Retrofit retrofit = RetrofitBuilder.getInstance();
-//        ICategoryAPI iPostAPI  = retrofit.create(ICategoryAPI.class);
-//        Call<List<Category>> postGet = iPostAPI.getCategories();
-//
-//        postGet.enqueue(new Callback<List<Category>>() {
+//        Retrofit retrofit = BuilderSignup.getInstance();
+////        SignupEntity signupEntity = new SignupEntity(name, email, password, address);
+//        SliderInterface sliderInterface = retrofit.create(SliderInterface.class);
+//        Call<List<ProductEntity>> productListCall = sliderInterface.postLog(catName);
+//        productListCall.enqueue(new Callback<List<ProductEntity>>() {
 //            @Override
-//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//            public void onResponse(Call<List<ProductEntity>> call, Response<List<ProductEntity>> response) {
+////                if(response.body()==null){
+////                    Toast.makeText(Dummy.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+////                }
+////                Toast.makeText(SignUp.this, "Signin Successful", Toast.LENGTH_SHORT).show();
+////                Toast.makeText(SignUp.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
+////                startActivity(new Intent(getApplicationContext(), Dummy.class));
+//                Toast.makeText(getContext(), "Everything is correct", Toast.LENGTH_SHORT).show();
 //
-//                RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-//                Log.d("ABC", "Able to fetch Category List");
-//                RecyclerViewAdapter categoryAdapter = new RecyclerViewAdapter(response.body(), HomeFragment.this);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//                recyclerView.setAdapter(categoryAdapter);
+//                Intent intent = new Intent(getContext(), Product.class);
+//                startActivity(intent);
 //            }
 //
 //            @Override
-//            public void onFailure(Call<List<Category>> call, Throwable t) {
-//
-//                Log.d("CategoryList", "onFailure: "+t.getMessage());
-//                Toast.makeText(getContext(),"Failled to excecute", Toast.LENGTH_SHORT).show();
+//            public void onFailure(Call<List<ProductEntity>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Everything is wrong", Toast.LENGTH_SHORT).show();
+////                Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
 //    }
-//
-//    @Override
-//    public void onUserClick(Category category) {
-//        Toast.makeText(getContext(), "Post has been removed: "+ category.getName(), Toast.LENGTH_SHORT).show();
-//    }
-//
 
+    public String  fun()
+    {
+        return p;
+    }
 
 }

@@ -79,11 +79,11 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             rootview=view;
 
             productName = view.findViewById(R.id.product_name);
-            attribute1 = view.findViewById(R.id.Attribute1);
-            attribute2 = view.findViewById(R.id.Attribute2);
-            attribute3 = view.findViewById(R.id.Attribute3);
-            attribute4 = view.findViewById(R.id.Attribute4);
-            productImage = itemView.findViewById(R.id.product_image);
+            attribute1 = view.findViewById(R.id.Attribute10);
+            attribute2 = view.findViewById(R.id.Attribute20);
+            attribute3 = view.findViewById(R.id.Attribute30);
+            attribute4 = view.findViewById(R.id.Attribute40);
+            productImage = itemView.findViewById(R.id.product_image10);
         }
     }
 }
