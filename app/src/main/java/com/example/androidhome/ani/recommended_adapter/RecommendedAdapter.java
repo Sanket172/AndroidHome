@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidhome.R;
-import  com.example.androidhome.ani.recommended_model.*;
+
+import com.example.androidhome.ani.recommendRetro.RecommendEntity;
 import  com.example.androidhome.ani.recommended_adapter.*;
 import com.bumptech.glide.Glide;
 
@@ -18,10 +19,10 @@ import java.util.List;
 
 public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.ViewHolder> {
 
-    private final List<Recommended_Model> recommendedDataList;
+    private final List<RecommendEntity> recommendedDataList;
     private final RecommendedDataInterface recommendedDataInterface;
 
-    public RecommendedAdapter(List<Recommended_Model> recommendedDataList, RecommendedDataInterface recommendedDataInterface) {
+    public RecommendedAdapter(List<RecommendEntity> recommendedDataList, RecommendedDataInterface recommendedDataInterface) {
         this.recommendedDataInterface = recommendedDataInterface;
         this.recommendedDataList = recommendedDataList;
     }
@@ -29,22 +30,20 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Recommended_Model recommended_model=recommendedDataList.get(position);
-        holder.productName.setText(recommended_model.getProductName());
-        holder.attribute1.setText(recommended_model.getAttribute1());
-        holder.attribute2.setText(recommended_model.getAttribute2());
-        holder.attribute3.setText(recommended_model.getAttribute5());
-        holder.attribute4.setText(recommended_model.getAttribute4());
+        RecommendEntity recommendEntity=recommendedDataList.get(position);
+        holder.productName.setText(recommendEntity.getProductName());
+        holder.attribute1.setText(recommendEntity.getAttribute1());
+        holder.attribute2.setText(recommendEntity.getAttribute2());
+        holder.attribute3.setText(recommendEntity.getAttribute5());
+        holder.attribute4.setText(recommendEntity.getAttribute4());
 
         Glide.with(holder.itemView)
-                .load(recommended_model.getImageUrl())
+                .load(recommendEntity.getImage())
                 .fitCenter()
                 .into(holder.productImage);
 
         holder.rootview.setOnClickListener(view -> {
-
-            recommendedDataInterface.onUserClick(recommended_model, view, holder.getAdapterPosition());
-
+            recommendedDataInterface.onUserClick(recommendEntity, view, holder.getAdapterPosition());
         });
     }
 
@@ -60,7 +59,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         return new RecommendedAdapter.ViewHolder(view);
     }
     public interface RecommendedDataInterface{
-        void onUserClick(Recommended_Model recommended_model, View view,int position);
+        void onUserClick(RecommendEntity recommendEntity, View view,int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

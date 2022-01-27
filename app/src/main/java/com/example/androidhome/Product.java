@@ -90,8 +90,10 @@ public class Product extends AppCompatActivity implements ProductAdapter.Product
     @Override
     public void onUserClick(ProductEntity productEntity) {
 
+
         Toast.makeText(this, "Image Clicked for" + productEntity.getProductName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ProductFullView.class);
+        intent.putExtra("productId", productEntity.getProductId());
         startActivity(intent);
     }
 

@@ -3,7 +3,9 @@ package com.example.androidhome;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.androidhome.ani.RetrofitInterfaces.RecommendInterface;
 import com.example.androidhome.ani.RetrofitInterfaces.SliderInterface;
+import com.example.androidhome.ani.builder.BuilderRecommended;
 import com.example.androidhome.ani.builder.BuilderSignup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.androidhome.ani.productRetro.ProductEntity;
+import com.example.androidhome.ani.recommendRetro.RecommendEntity;
 import com.example.androidhome.ani.signupRetro.SignUpActivity;
 import com.example.androidhome.ani.slider_model.*;
 import com.example.androidhome.ani.slider_adapter.*;
@@ -134,8 +137,8 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
 ////                startActivity(intent);
 
 
-                Toast.makeText(getContext(), p+"...", Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(getContext(), p+"...", Toast.LENGTH_SHORT).show();
+//
                 Intent intent = new Intent(getContext(), Product.class);
                 intent.putExtra("categoryName", p);
                 startActivity(intent);
@@ -144,13 +147,27 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
         });
 
 
-        List<Recommended_Model> recommended_models = new ArrayList<>();
-        generateUserData(recommended_models);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler1);
-        RecommendedAdapter recommendedAdapter = new RecommendedAdapter(recommended_models, HomeFragment.this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(recommendedAdapter);
+
+        RecyclerView recyclerView=view.findViewById(R.id.recycler1);
+        Retrofit retrofit= BuilderRecommended.getInstance();
+        RecommendInterface recommendInterface=retrofit.create(RecommendInterface.class);
+        Call <List<RecommendEntity>> recommendEntityCall=recommendInterface.postlog();
+        recommendEntityCall.enqueue(new Callback <List<RecommendEntity>>() {
+
+            @Override
+            public void onResponse(Call <List<RecommendEntity>> call, Response< List<RecommendEntity>> response) {
+                List<RecommendEntity> recommendEntity=response.body();
+                RecommendedAdapter recommendedAdapter=new RecommendedAdapter(recommendEntity,HomeFragment.this);
+                recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+                recyclerView.setAdapter(recommendedAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<RecommendEntity>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not able to get recommended products", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 //    private ProductDto getProductDetailsByCategory(String categoryName)
@@ -162,23 +179,18 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
 //
 //    }
 
-    private void generateUserData(List<Recommended_Model> recommendDataList) {
-
-        recommendDataList.add(new Recommended_Model("1", 100, "Call of Duty Ghosts", "Game", 0L, "Infinity Ward", "Xbox One", "Single, Multi, Online Multi", "Action", "Activician", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kkbh8cw0/physical-game/r/e/m/infinity-ward-call-of-duty-ghosts-graphic-game-xbox-one-original-imafzzqmw5afvjej.jpeg?q=70" ));//        productModelList.add(new ProductModel("Employee 2", 101));
-        recommendDataList.add(new Recommended_Model("2", 100, "James Bond 007 (Blood Stone)", "Game", 0L, "Blood stone", "Xbox 360", "Single, Multi, Online Multi", "Action", "Activician", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kkbh8cw0/physical-game/r/5/9/blood-stone-james-bond-007-graphic-game-xbox-360-original-imafzzqer5rhzheh.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("3", 100, "Black Rose Valkyrie Sp. Japanese Version (PS4)", "Game", 0L, "Ultimate Evil", "Xbox 360", "Single, Multi, Online Multi", "RPG", "Blizzard", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kirr24w0-0/physical-game/r/m/z/ultimate-evil-edition-black-rose-valkyrie-special-edition-original-imafyhd7zncnqyg8.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("4", 100, "Ashes Cricket (for PS4)", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Sports", "Koach", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/j8uiljk0/physical-game/t/f/z/standard-edition-ashes-cricket-full-game-ps4-original-imaeysfjybhwxda9.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("5", 100, "Gran Turismo 7 (Standard) (for PS4)", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Racing", "Blizzard", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kwb07m80/physical-game/h/r/j/yes-standard-edition-ps4-gran-turismo-7-standard-ed-full-game-original-imag9yd5gkfzkpus.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("6", 100, "Diablo III : Reaper of Souls (Ultimate Evil Edition)", "Game", 0L, " Game & Exp Pack", "PS4", "Single, Multi, Online Multi", "RPG", "Sony", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/physical-game/3/v/z/ps4-ultimate-evil-edition-game-and-expansion-pack-diablo-iii-original-imae37ekvqv77gbz.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("7", 100, "Pillars Eternity", "Game", 0L, "Complete", "PS4", "Single, Multi, Online Multi", "RPG", "505 Games", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/j5mrxjk0/physical-game/h/v/e/complete-edition-pillars-of-eternity-game-and-map-pack-ps4-original-imaewa3evygh8zvj.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("8", 100, "The Witcher 3 : Wild Hunt(PS4)", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Action", "505 Games", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/physical-game/b/g/c/ps4-the-witcher-3-wild-hunt-original-imaejtzhsbnjg2jh.jpeg?q=70" ));
-        recommendDataList.add(new Recommended_Model("9", 100, "Marvel's Avengers", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Action Adv", "Sony", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/k6zda4w0/physical-game/x/z/z/standard-marvel-s-avengers-full-game-ps4-original-imafpbedz4dqty47.jpeg?q=70" ));
-    }
-
-    @Override
-    public void onUserClick(Recommended_Model recommended_model, View view, int position) {
-        startActivity(new Intent(getContext(),Product.class));
-    }
+//    private void generateUserData(List<RecommendEntity> recommendDataList) {
+//
+//        recommendDataList.add(new RecommendEntity("1", 100, "Call of Duty Ghosts", "Game", 0L, "Infinity Ward", "Xbox One", "Single, Multi, Online Multi", "Action", "Activician", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kkbh8cw0/physical-game/r/e/m/infinity-ward-call-of-duty-ghosts-graphic-game-xbox-one-original-imafzzqmw5afvjej.jpeg?q=70" ));//        productModelList.add(new ProductModel("Employee 2", 101));
+//        recommendDataList.add(new RecommendEntity("2", 100, "James Bond 007 (Blood Stone)", "Game", 0L, "Blood stone", "Xbox 360", "Single, Multi, Online Multi", "Action", "Activician", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kkbh8cw0/physical-game/r/5/9/blood-stone-james-bond-007-graphic-game-xbox-360-original-imafzzqer5rhzheh.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("3", 100, "Black Rose Valkyrie Sp. Japanese Version (PS4)", "Game", 0L, "Ultimate Evil", "Xbox 360", "Single, Multi, Online Multi", "RPG", "Blizzard", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kirr24w0-0/physical-game/r/m/z/ultimate-evil-edition-black-rose-valkyrie-special-edition-original-imafyhd7zncnqyg8.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("4", 100, "Ashes Cricket (for PS4)", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Sports", "Koach", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/j8uiljk0/physical-game/t/f/z/standard-edition-ashes-cricket-full-game-ps4-original-imaeysfjybhwxda9.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("5", 100, "Gran Turismo 7 (Standard) (for PS4)", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Racing", "Blizzard", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/kwb07m80/physical-game/h/r/j/yes-standard-edition-ps4-gran-turismo-7-standard-ed-full-game-original-imag9yd5gkfzkpus.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("6", 100, "Diablo III : Reaper of Souls (Ultimate Evil Edition)", "Game", 0L, " Game & Exp Pack", "PS4", "Single, Multi, Online Multi", "RPG", "Sony", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/physical-game/3/v/z/ps4-ultimate-evil-edition-game-and-expansion-pack-diablo-iii-original-imae37ekvqv77gbz.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("7", 100, "Pillars Eternity", "Game", 0L, "Complete", "PS4", "Single, Multi, Online Multi", "RPG", "505 Games", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/j5mrxjk0/physical-game/h/v/e/complete-edition-pillars-of-eternity-game-and-map-pack-ps4-original-imaewa3evygh8zvj.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("8", 100, "The Witcher 3 : Wild Hunt(PS4)", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Action", "505 Games", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/physical-game/b/g/c/ps4-the-witcher-3-wild-hunt-original-imaejtzhsbnjg2jh.jpeg?q=70" ));
+//        recommendDataList.add(new RecommendEntity("9", 100, "Marvel's Avengers", "Game", 0L, "Standard", "PS4", "Single, Multi, Online Multi", "Action Adv", "Sony", null, "Create-A-Soldier system for avatar customization", "CoD: Ghosts tells the story of Logan and Hesh, two jarheads who find themselves part of the last stand of the USA against invaders from the South American Federation after the SAF nukes the US from orbit. ... Once Logan and Hesh – and their dog Riley – join the Ghosts, things begin to move into high gear.", "https://rukminim1.flixcart.com/image/832/832/k6zda4w0/physical-game/x/z/z/standard-marvel-s-avengers-full-game-ps4-original-imafpbedz4dqty47.jpeg?q=70" ));
+//    }
 
 //    public void SliderApi(String catName) {
 //
@@ -212,6 +224,13 @@ public class HomeFragment extends Fragment implements RecommendedAdapter.Recomme
     public String  fun()
     {
         return p;
+    }
+
+    @Override
+    public void onUserClick(RecommendEntity recommendEntity, View view, int position) {
+        Intent intent =new Intent(getContext(),ProductFullView.class);
+        intent.putExtra("productId", recommendEntity.getProductId());
+        startActivity(intent);
     }
 
 }
