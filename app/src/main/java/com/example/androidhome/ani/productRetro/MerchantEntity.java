@@ -19,6 +19,17 @@ public class MerchantEntity implements Serializable {
     @SerializedName("rating")
     private double rating;
 
+    @SerializedName("merchantName")
+    private String merchantName;
+
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
+    }
+
     public Long getMerchantId() {
         return merchantId;
     }

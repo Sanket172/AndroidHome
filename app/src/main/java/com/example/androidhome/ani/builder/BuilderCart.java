@@ -15,6 +15,11 @@ public class BuilderCart {
                 if(instance==null){
                     instance=new Retrofit.Builder().baseUrl("http://10.177.1.232:8084/").
                             addConverterFactory(GsonConverterFactory.create()).client(new OkHttpClient()).build();
+
+//                    instance=new Retrofit.Builder().baseUrl("http://10.177.1.134:1001/").
+//                            addConverterFactory(GsonConverterFactory.create()).client(new OkHttpClient()).build();
+
+
                 }
             }
         }

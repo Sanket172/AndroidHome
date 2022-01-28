@@ -12,5 +12,5 @@ import retrofit2.http.Path;
 
 public interface ProductFullViewInterface {
     @GET("/product/{id}")
-    Call<ProductEntity> postLog(@Path("id") String  productID);
+    Call<ProductEntity> postLog(@Path("id") String  id);
 }

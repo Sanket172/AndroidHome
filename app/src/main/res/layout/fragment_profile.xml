@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="@color/ourlogo"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
+        android:backgroundTint="@color/ourlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintStart_toStartOf="parent"

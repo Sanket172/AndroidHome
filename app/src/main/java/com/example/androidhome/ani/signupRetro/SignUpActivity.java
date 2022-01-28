@@ -98,6 +98,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signupAPI(String name, String email, String password, String address) {
 
+
+        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("email",email);
+        editor.putString("username",name);
+        editor.putString("address",address);
+        editor.commit();
+
         Retrofit retrofit = BuilderSignup.getInstance();
         SignupEntity signupEntity = new SignupEntity(name, email, password, address);
         SignupInterface signupInterface = retrofit.create(SignupInterface.class);
@@ -109,6 +118,8 @@ public class SignUpActivity extends AppCompatActivity {
                 if(response.body()==null){
                     Toast.makeText(SignUpActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
                 }
+
+
                 Toast.makeText(SignUpActivity.this, "Signin Successful", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(SignUp.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUpActivity.this, DashboardActivity.class);
@@ -147,9 +158,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
 
-
-
-            SharedPreferences sharedPreferences = getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
@@ -162,9 +170,16 @@ public class SignUpActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("loginchecker", "3");
+                SharedPreferences sharedPreferences1=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor=sharedPreferences1.edit();
+                editor.putString("email",personEmail);
                 editor.apply();
+
+                SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                editor1.putString("loginchecker", "3");
+                editor1.apply();
 
                 Log.d("ABCDEFGH", "User Email :- "+personEmail);
                 Toast.makeText(this, "User ID :- "+personEmail, Toast.LENGTH_SHORT ).show();

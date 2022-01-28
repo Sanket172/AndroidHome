@@ -4,40 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SureLogout">
-
+    android:background="@color/white"
+    tools:context=".Logout">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:text="Are you Sure?"
-        android:textSize="20sp"
+        android:layout_marginTop="200dp"
+        android:text="Sure you want to log out?"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:id="@+id/btNo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/ourlogo"
+        android:text="no"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toEndOf="@+id/btYes"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="56dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
+        android:id="@+id/btYes"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/ourlogo"
+        android:text="yes"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

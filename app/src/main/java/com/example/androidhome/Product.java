@@ -93,15 +93,35 @@ public class Product extends AppCompatActivity implements ProductAdapter.Product
     public void onUserClick(ProductEntity productEntity) {
 
 
-        Toast.makeText(this, "Image Clicked for" + productEntity.getProductName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Image Clicked for" + productEntity.getProductName(), Toast.LENGTH_SHORT).show();
+////        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+//
+//
+//        Intent intent = new Intent(this, ProductFullView.class);
+//        intent.putExtra("productId",productEntity.getProductId());
+//        intent.putExtra("merchantId", productEntity.getMerchantList().get(0).getMerchantId());
+//
+//        startActivity(intent);
+//
+
 //        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor=sharedPreferences.edit();
+//        editor.putString("productID",productEntity.getProductId());
+
+        Toast.makeText(this, "Image Clicked for" + productEntity.getProductId(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, ProductFullView.class);
+//        String p = productEntity.getProductId();
+//        intent.putExtra("productId",productEntity.getProductId());
+     //   Bundle bundle = new Bundle();
+        //String productId =productEntity.getProductId();
         intent.putExtra("productId",productEntity.getProductId());
-        intent.putExtra("merchantId", productEntity.getMerchantList().get(0).getMerchantId());
-
+   //     bundle.putSerializable("product", productEntity);
+     //   intent.putExtras(bundle);
+        //intent.putExtra("merchantId", productEntity.getMerchantList().get(0).getMerchantId());
         startActivity(intent);
     }
+
 
 
     public void SliderApi(String catName, List<ProductEntity> productEntities) {

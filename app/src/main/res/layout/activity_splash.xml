@@ -4,14 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".SplashActivity"
+    android:background="@color/ourlogo"
+    >
 
     <ImageView
         android:id="@+id/category_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="337dp"
+        android:layout_height="662dp"
         android:scaleType="fitCenter"
-        android:background="@color/black"
-        android:src="@drawable/davadarulogo"/>
+        android:src="@drawable/davadarulogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

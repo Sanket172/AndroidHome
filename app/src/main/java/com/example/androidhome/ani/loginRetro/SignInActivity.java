@@ -166,10 +166,15 @@ public class SignInActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("loginchecker", "3");
+                SharedPreferences sharedPreferences1=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences1.edit();
+                editor.putString("email",personEmail);
                 editor.apply();
-                editor.commit();
+
+
+                SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                editor1.putString("loginchecker", "3");
+                editor1.apply();
 
                 Log.d("ABCDEFGH", "User Email :- "+personEmail);
                 Toast.makeText(this, "User ID :- "+personEmail, Toast.LENGTH_SHORT ).show();

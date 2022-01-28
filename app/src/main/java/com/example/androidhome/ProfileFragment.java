@@ -115,9 +115,15 @@ public class ProfileFragment extends Fragment {
 
             SharedPreferences sharedPreferences = dashboardActivity.getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("loginchecker", "0");
+//            editor.putString("loginchecker", "0");
+            editor.clear();
             editor.apply();
-            editor.commit();
+
+            SharedPreferences sharedPreferences1 = dashboardActivity.getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+            editor1.clear();
+            editor1.apply();
+
 
             Intent intent = new Intent(getContext(), LoginCheckerActivity.class);
             dashboardActivity.finish();

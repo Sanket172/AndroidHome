@@ -29,7 +29,7 @@ public class Account extends AppCompatActivity {
         tv_address=findViewById(R.id.Address);
 
         tv_name.setText(email);
-        tv_name.setText(email);
+        tv_phone.setText(email);
         tv_address.setText(email);
     }
 }
