@@ -4,27 +4,20 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BuilderProduct {
-
-
+public class BuilderCart {
     private static Retrofit instance;
 
-    public BuilderProduct() {
+    public BuilderCart() {
     }
     public static Retrofit getInstance(){
         if(instance==null){
-            synchronized (BuilderProduct.class){
+            synchronized (BuilderCart.class){
                 if(instance==null){
-                    instance=new Retrofit.Builder().baseUrl("http://10.177.1.134:8083/").
+                    instance=new Retrofit.Builder().baseUrl("http://10.177.1.232:8084/").
                             addConverterFactory(GsonConverterFactory.create()).client(new OkHttpClient()).build();
-
-//                    instance=new Retrofit.Builder().baseUrl("http://10.177.1.134:1001/").
-//                            addConverterFactory(GsonConverterFactory.create()).client(new OkHttpClient()).build();
-
                 }
             }
         }
         return instance;
     }
 }
-

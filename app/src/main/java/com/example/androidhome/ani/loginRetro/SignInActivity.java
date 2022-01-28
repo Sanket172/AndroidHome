@@ -91,11 +91,17 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    public void loginAPI(String mail,String pwd){
+    public void loginAPI(String email,String pwd){
+
+        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("email",email);
+
 
         Retrofit retrofit= BuilderSignup.getInstance();
 
-        LoginEntity loginEntity = new LoginEntity(mail,pwd);
+        LoginEntity loginEntity = new LoginEntity(email,pwd);
 
         LoginInterface loginInterface = retrofit.create(LoginInterface.class);
 

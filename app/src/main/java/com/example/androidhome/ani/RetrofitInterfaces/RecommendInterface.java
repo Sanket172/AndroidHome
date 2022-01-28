@@ -11,4 +11,5 @@ import retrofit2.http.Path;
 public interface RecommendInterface {
     @GET("/product/recommends")
     Call<List<RecommendEntity>> postlog();
+
 }

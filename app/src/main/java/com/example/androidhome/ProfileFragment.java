@@ -32,11 +32,6 @@ import com.google.android.gms.tasks.Task;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment {
 
 

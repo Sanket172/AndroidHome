@@ -2,19 +2,26 @@ package com.example.androidhome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.androidhome.ani.RetrofitInterfaces.CartInterface;
 import com.example.androidhome.ani.RetrofitInterfaces.ProductFullViewInterface;
+import com.example.androidhome.ani.builder.BuilderCart;
 import com.example.androidhome.ani.builder.BuilderProductView;
+import com.example.androidhome.ani.cartRetro.CartEntity;
+import com.example.androidhome.ani.cartRetro.CartProductEntity;
 import com.example.androidhome.ani.productRetro.MerchantEntity;
 import com.example.androidhome.ani.productRetro.ProductEntity;
 
@@ -33,14 +40,19 @@ public class ProductFullView extends AppCompatActivity {
     TextView attribute4;
     TextView attribute5;
     TextView price;
-    String p;
+    Button addtocart;
+    String productId;
+    String merchantId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_full_view);
-        p=getIntent().getStringExtra("productId");
+        productId = "61f26b4c1e5b0c407a048b64";
+        //productId= getIntent().getStringExtra("productId");
+       // merchantId=getIntent().getStringExtra("merchantId");
+        merchantId  = "61f2687110a9f61f1546eed8";
+        getProductFullView(productId);
 
-        getProductFullView(p);
         productName=findViewById(R.id.Proname);
         image=findViewById(R.id.ProImg);
         description=findViewById(R.id.prodes);
@@ -50,7 +62,52 @@ public class ProductFullView extends AppCompatActivity {
         attribute4=findViewById(R.id.proattribute4);
         attribute5=findViewById(R.id.proattribute5);
         price=findViewById(R.id.Proprice);
+
+
+
+        addtocart=findViewById(R.id.PFVAddtocart);
+
+        addtocart.setOnClickListener(view -> {
+//            loginAPI(email.getText().toString(),pwd.getText().toString());
+            SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+
+            String email=sharedPreferences.getString("email","Default");
+            Double price = Double.parseDouble(sharedPreferences.getString("price", "1"));
+            int quantity = Integer.parseInt(sharedPreferences.getString("quantity", "1"));
+            Double grandTotal = Double.parseDouble(sharedPreferences.getString("grandTotal", "1"));
+
+
+
+
+            cartApi(email , grandTotal, productId, quantity, merchantId, price);
+        });
+
     }
+
+    private void cartApi(String email, Double grandTotal , String productId, int quantity, String merchantId, Double price){
+
+        CartProductEntity cartProductEntity = new CartProductEntity(productId, quantity, merchantId, price);
+        CartEntity cartEntity = new CartEntity(productId, email, grandTotal, cartProductEntity);
+
+        Retrofit retrofit = BuilderCart.getInstance();
+        CartInterface cartInterface = retrofit.create(CartInterface.class);
+
+
+        Call<java.lang.Void> cartInterfaceCall = cartInterface.postLog(cartEntity);
+        cartInterfaceCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(ProductFullView.this,"Hello Boys Chai Pilo",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     private void getProductFullView(String productId){
 
         Retrofit retrofit= BuilderProductView.getInstance();
@@ -72,6 +129,18 @@ public class ProductFullView extends AppCompatActivity {
                 attribute5.setText(productEntityList.getAttribute5());
                 price.setText(String.valueOf(productEntityList.getMerchantList().get(0).getPrice()));
                 Glide.with(image.getContext()).load(productEntityList.getImage()).placeholder(R.drawable.ic_baseline_person).into(image);
+
+
+                SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+
+
+                editor.putString("quantity", "1");
+                editor.putString("merchantId", "0");
+                editor.putString("price", String.valueOf(productEntityList.getMerchantList().get(0).getPrice()));
+                editor.putString("grandTotal", String.valueOf(productEntityList.getMerchantList().get(0).getPrice()));
+
                 Toast.makeText(ProductFullView.this,response.body().getProductId(),Toast.LENGTH_SHORT).show();
 
             }

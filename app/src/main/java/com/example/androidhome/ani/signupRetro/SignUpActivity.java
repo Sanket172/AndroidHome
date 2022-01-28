@@ -111,7 +111,8 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 Toast.makeText(SignUpActivity.this, "Signin Successful", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(SignUp.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                Intent intent = new Intent(SignUpActivity.this, DashboardActivity.class);
+                startActivity(intent);
             }
 
             @Override

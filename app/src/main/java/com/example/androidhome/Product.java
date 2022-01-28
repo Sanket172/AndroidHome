@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -92,8 +94,12 @@ public class Product extends AppCompatActivity implements ProductAdapter.Product
 
 
         Toast.makeText(this, "Image Clicked for" + productEntity.getProductName(), Toast.LENGTH_SHORT).show();
+//        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+
         Intent intent = new Intent(this, ProductFullView.class);
-        intent.putExtra("productId", productEntity.getProductId());
+        intent.putExtra("productId",productEntity.getProductId());
+        intent.putExtra("merchantId", productEntity.getMerchantList().get(0).getMerchantId());
+
         startActivity(intent);
     }
 
