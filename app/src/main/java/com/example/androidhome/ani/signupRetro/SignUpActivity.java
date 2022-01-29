@@ -99,10 +99,10 @@ public class SignUpActivity extends AppCompatActivity {
     public void signupAPI(String name, String email, String password, String address) {
 
 
-        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("email",email);
+        editor.putString("email","a");
         editor.putString("username",name);
         editor.putString("address",address);
         editor.commit();
@@ -170,7 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                SharedPreferences sharedPreferences1=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences1=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
 
                 SharedPreferences.Editor editor=sharedPreferences1.edit();
                 editor.putString("email",personEmail);

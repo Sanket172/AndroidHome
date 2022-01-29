@@ -1,25 +1,26 @@
 package com.example.androidhome;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.androidhome.R;
 import com.example.androidhome.ani.RetrofitInterfaces.OrderInterface;
 import com.example.androidhome.ani.builder.BuilderCart;
-import com.example.androidhome.ani.cartRetro.CartRecieveEntity;
 import com.example.androidhome.ani.orderHistory_adapter.OrderHistoryItemsAdapter;
-import com.example.androidhome.ani.orderHistory_model.OrderHistoryModel;
+import com.example.androidhome.ani.orderHistory_adapter.OrderHistoryProductsAdapter;
 import com.example.androidhome.ani.orderhistoryRetro.OrderHistoryEntity;
 import com.example.androidhome.ani.orderhistoryRetro.OrderItemsEntity;
+import com.example.androidhome.ani.orderhistoryRetro.ProductsOrdersList;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,45 +28,46 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-
-public class OrderHistory extends AppCompatActivity implements OrderHistoryItemsAdapter.OrderHistoryItemsInterface{
+public class OrderHistoryProducts extends AppCompatActivity implements OrderHistoryProductsAdapter.OrderHistoryProductsDataInterface{
 
     String email;
+    String orderId;
 
-    public OrderHistory() {
-        // Required empty public constructor
+    public OrderHistoryProducts() {
+
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_order_history);
+        setContentView(R.layout.activity_order_history_products);
 
-
-
-        OrderHistoryDetailsApi();
+        OrderHistoryProductsDetailsApi();
 
     }
 
-    public void OrderHistoryDetailsApi() {
+    public void OrderHistoryProductsDetailsApi() {
 
 
         Retrofit retrofit = BuilderCart.getInstance();
+        orderId=getIntent().getStringExtra("orderId");
+
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.e_mobile", Context.MODE_PRIVATE);
         email = sharedPreferences.getString("email", "Default");
 
-        Call<OrderHistoryEntity> orderHistoryEntityCall = retrofit.create(OrderInterface.class).postLogRecieve(email);
+        OrderItemsEntity orderItemsEntity = new OrderItemsEntity(orderId, email);
+        Call<OrderItemsEntity> orderHistoryEntityCall = retrofit.create(OrderInterface.class).postLogRecieveProductList(orderItemsEntity);
 
         Log.d("Hellllllllllllooooo", "1SliderAPI");
 
-        orderHistoryEntityCall.enqueue(new Callback<OrderHistoryEntity>() {
+        orderHistoryEntityCall.enqueue(new Callback<OrderItemsEntity>() {
             @Override
-            public void onResponse(Call<OrderHistoryEntity> call, Response<OrderHistoryEntity> response) {
+            public void onResponse(Call<OrderItemsEntity> call, Response<OrderItemsEntity> response) {
 
-                RecyclerView recyclerView = findViewById(R.id.cartrecycler);
-                OrderHistoryItemsAdapter orderHistoryItemsAdapter = new OrderHistoryItemsAdapter(response.body().getOrderList(),  OrderHistory.this);
+                RecyclerView recyclerView = findViewById(R.id.ohk);
+                OrderHistoryProductsAdapter orderHistoryProductsAdapter = new OrderHistoryProductsAdapter(response.body().getProductsList(),  OrderHistoryProducts.this);
                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-                recyclerView.setAdapter(orderHistoryItemsAdapter);
+                recyclerView.setAdapter(orderHistoryProductsAdapter);
 
                 //Toast.makeText(getApplicationContext(), response.body().getCa.get(0).getProductName(), Toast.LENGTH_SHORT).show();
                 // Toast.makeText(CartActivity.this,response.body().getUserEmail(), Toast.LENGTH_SHORT).show();
@@ -74,19 +76,16 @@ public class OrderHistory extends AppCompatActivity implements OrderHistoryItems
             }
 
             @Override
-            public void onFailure(Call<OrderHistoryEntity> call, Throwable t) {
-                Toast.makeText(OrderHistory.this, "Everything is wrong", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<OrderItemsEntity> call, Throwable t) {
+                Toast.makeText(OrderHistoryProducts.this, "Everything is wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @Override
-    public void onUserClick(OrderItemsEntity orderItemsEntity) {
 
-        Toast.makeText(this, "Image Clicked for" + orderItemsEntity.getOrderId(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, OrderHistoryProducts.class);
-        intent.putExtra("orderId",orderItemsEntity.getOrderId());
-        startActivity(intent);
+    @Override
+    public void onUserClick(ProductsOrdersList productsOrdersList) {
+
 
     }
 }

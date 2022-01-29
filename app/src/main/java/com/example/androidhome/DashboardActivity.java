@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -40,11 +41,14 @@ public class DashboardActivity extends AppCompatActivity {
                 case R.id.cart:
                     if(j.equals("3"))
                     {
-                        setCurrentFragment(cartFragment);
+                        //setCurrentFragment(cartobj);
+                        Intent i = new Intent(DashboardActivity.this, CartActivity.class);
+                        startActivity(i);
                     }
                     else {
                         Intent i = new Intent(DashboardActivity.this, SignupOrLogin.class);
                         startActivity(i);
+
                     }
                     break;
 

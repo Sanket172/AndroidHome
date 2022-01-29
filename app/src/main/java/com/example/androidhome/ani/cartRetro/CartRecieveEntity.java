@@ -1,20 +1,14 @@
 package com.example.androidhome.ani.cartRetro;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CartEntity {
+public class CartRecieveEntity implements Serializable {
 
     private String id;
     private String userEmail;
     private Double grandTotal;
-    private CartProducts cartProducts;
-
-
-    //For Send
-    public CartEntity(String userEmail, CartProducts cartProducts) {
-        this.userEmail = userEmail;
-        this.cartProducts = cartProducts;
-    }
+    private List<CartProducts> cartProductList;
 
     public String getId() {
         return id;
@@ -40,11 +34,11 @@ public class CartEntity {
         this.grandTotal = grandTotal;
     }
 
-    public CartProducts getCartProductEntity() {
-        return cartProducts;
+    public List<CartProducts> getCartProductList() {
+        return cartProductList;
     }
 
-    public void setCartProductEntity(CartProducts cartProducts) {
-        this.cartProducts = cartProducts;
+    public void setCartProductList(List<CartProducts> cartProductList) {
+        this.cartProductList = cartProductList;
     }
 }

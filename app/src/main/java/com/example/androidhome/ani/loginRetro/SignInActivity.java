@@ -93,10 +93,10 @@ public class SignInActivity extends AppCompatActivity {
 
     public void loginAPI(String email,String pwd){
 
-        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("email",email);
+        editor.putString("email","a");
 
 
         Retrofit retrofit= BuilderSignup.getInstance();
@@ -166,9 +166,9 @@ public class SignInActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                SharedPreferences sharedPreferences1=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences1=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences1.edit();
-                editor.putString("email",personEmail);
+                editor.putString("email","a");
                 editor.apply();
 
 

@@ -7,20 +7,26 @@ import java.io.Serializable;
 public class MerchantEntity implements Serializable {
 
 
-    @SerializedName("id")
-    private Long merchantId;
-
-    @SerializedName("stock")
-    private String stock;
-
-    @SerializedName("price")
-    private double price;
-
-    @SerializedName("rating")
-    private double rating;
-
+    @SerializedName("merchantId")
+    private String merchantId;
     @SerializedName("merchantName")
     private String merchantName;
+    @SerializedName("usp")
+    private String usp;
+    @SerializedName("stock")
+    private Long stock;
+    @SerializedName("price")
+    private double price;
+    @SerializedName("productRating")
+    private double productRating;
+
+    public String getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+    }
 
     public String getMerchantName() {
         return merchantName;
@@ -30,19 +36,19 @@ public class MerchantEntity implements Serializable {
         this.merchantName = merchantName;
     }
 
-    public Long getMerchantId() {
-        return merchantId;
+    public String getUsp() {
+        return usp;
     }
 
-    public void setMerchantId(Long merchantId) {
-        this.merchantId = merchantId;
+    public void setUsp(String usp) {
+        this.usp = usp;
     }
 
-    public String getStock() {
+    public Long getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 
@@ -54,11 +60,11 @@ public class MerchantEntity implements Serializable {
         this.price = price;
     }
 
-    public double getRating() {
-        return rating;
+    public double getProductRating() {
+        return productRating;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setProductRating(double productRating) {
+        this.productRating = productRating;
     }
 }

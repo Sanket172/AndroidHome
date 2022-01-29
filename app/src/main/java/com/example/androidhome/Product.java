@@ -104,7 +104,7 @@ public class Product extends AppCompatActivity implements ProductAdapter.Product
 //        startActivity(intent);
 //
 
-//        SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+//        SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor=sharedPreferences.edit();
 //        editor.putString("productID",productEntity.getProductId());
 

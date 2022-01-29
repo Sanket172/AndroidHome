@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHome"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SureLogout"></activity>
+        <activity android:name=".OrderHistoryProducts"></activity>
+        <activity android:name=".CartActivity" />
+        <activity android:name=".SureLogout" />
         <activity android:name=".LoginCheckerActivity" /> <!-- <activity android:name=".AfterSplash"></activity> -->
         <activity android:name=".SignupOrLogin" />
         <activity android:name=".ani.signupRetro.SignUpActivity" />
