@@ -37,37 +37,35 @@ public class CartActivity extends AppCompatActivity implements CartRecieveAdapte
     TextView totalp;
     Button btn;
 
-    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        CartProductApi();
         Log.d("ABBBBBBBBBBBBBBBBBBBBBB", "Hello ....... ");
 
 
+        CartProductApi();
+
 
         btn = findViewById(R.id.placeorder);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("com.example.andoidhome", Context.MODE_PRIVATE);
-        email = sharedPreferences.getString("email", "Default");
-
         btn.setOnClickListener(view -> {
 
-            PlaceOrderApi(email);
+            PlaceOrderApi();
 
         });
 
 
     }
 
-    private void PlaceOrderApi(String email){
+    private void PlaceOrderApi(){
 
 
         Retrofit retrofit = BuilderCart.getInstance();
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
-        email = sharedPreferences.getString("email", "Default");
+        String email = sharedPreferences.getString("email", "Default");
+
         CartInterface cartInterface = retrofit.create(CartInterface.class);
         Call<java.lang.Void> cartInterfaceCall = cartInterface.postLogPlace(email);
         cartInterfaceCall.enqueue(new Callback<Void>() {
@@ -88,10 +86,10 @@ public class CartActivity extends AppCompatActivity implements CartRecieveAdapte
     public void CartProductApi() {
 
         Retrofit retrofit = BuilderCart.getInstance();
-        SharedPreferences sharedPreferences = getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
-        email = sharedPreferences.getString("email", "Default");
+        SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+        String email =sharedPreferences.getString("email","Default");
 
-        Call<CartRecieveEntity> productListCall = retrofit.create(CartInterface.class).postLogRecieve("a");
+        Call<CartRecieveEntity> productListCall = retrofit.create(CartInterface.class).postLogRecieve(email);
 
 
         productListCall.enqueue(new Callback<CartRecieveEntity>() {

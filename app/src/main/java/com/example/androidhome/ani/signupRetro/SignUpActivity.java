@@ -102,10 +102,11 @@ public class SignUpActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("email","a");
+        editor.putString("email",email);
         editor.putString("username",name);
         editor.putString("address",address);
-        editor.commit();
+
+        editor.apply();
 
         Retrofit retrofit = BuilderSignup.getInstance();
         SignupEntity signupEntity = new SignupEntity(name, email, password, address);
@@ -173,13 +174,8 @@ public class SignUpActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences1=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
 
                 SharedPreferences.Editor editor=sharedPreferences1.edit();
-                editor.putString("email",personEmail);
+                editor.putString("email", personEmail);
                 editor.apply();
-
-                SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = sharedPreferences.edit();
-                editor1.putString("loginchecker", "3");
-                editor1.apply();
 
                 Log.d("ABCDEFGH", "User Email :- "+personEmail);
                 Toast.makeText(this, "User ID :- "+personEmail, Toast.LENGTH_SHORT ).show();

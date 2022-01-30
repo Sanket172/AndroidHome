@@ -29,7 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             SharedPreferences sharedpreferences = getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
-            String j = sharedpreferences.getString("loginchecker", "0");
+            String uemail = sharedpreferences.getString("email", "Default");
 
             int id = item.getItemId();
             boolean userLoggedIn=true;
@@ -39,7 +39,7 @@ public class DashboardActivity extends AppCompatActivity {
                     break;
 //
                 case R.id.cart:
-                    if(j.equals("3"))
+                    if(!uemail.equals("Default"))
                     {
                         //setCurrentFragment(cartobj);
                         Intent i = new Intent(DashboardActivity.this, CartActivity.class);
@@ -53,9 +53,10 @@ public class DashboardActivity extends AppCompatActivity {
                     break;
 
                 default:
-                    if(j.equals("3"))
+                    if(!uemail.equals("Default"))
                     {
                         setCurrentFragment(profileFragment);
+
                     }
                     else {
                         Intent i = new Intent(DashboardActivity.this, SignupOrLogin.class);

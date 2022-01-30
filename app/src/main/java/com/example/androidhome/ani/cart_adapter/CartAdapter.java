@@ -13,16 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.androidhome.R;
 import com.example.androidhome.ani.cart_model.*;
-import com.example.androidhome.ani.recommended_adapter.RecommendedAdapter;
-import com.example.androidhome.ani.recommended_model.Recommended_Model;
 
-import java.text.BreakIterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 
-    int count= 0;
+
     private final List<CartModel> cartModelList;
     private final CartDataInterface cartDataInterface;
 
@@ -32,8 +30,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.cartModelList=cartModelList;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        AtomicInteger count= new AtomicInteger();
         CartModel cartModel=cartModelList.get(position);
         holder.name.setText(cartModel.getName()+"");
         holder.price.setText(cartModel.getPrice()+"");
@@ -42,17 +43,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.rootview.setOnClickListener(view -> {
             cartDataInterface.onUserClick(cartModel, view,holder.getAdapterPosition());
         });
-        holder.inc.setOnClickListener(v -> {
-            count++;
-            holder.dis.setText(""+count);
-        });
-
-        holder.dec.setOnClickListener(v -> {
-            count--;
-            if(count<0)
-                count=0;
-            holder.dis.setText(""+count);
-        });
+//
+//        holder.inc.setOnClickListener(v -> {
+//            count.getAndIncrement();
+//
+//        });
+//
+//        holder.dec.setOnClickListener(v -> {
+//            count.getAndDecrement();
+//            if(count.get() <0)
+//                count.set(0);
+//        });
+//        holder.dis.setText(""+count);
     }
     @NonNull
     @Override
@@ -76,8 +78,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         private final TextView quantity;
         private final View rootview;
         private final ImageView imgProduct;
-        private final Button inc;
-        private final Button dec;
+        //private final Button inc;
+        //private final Button dec;
         private final TextView dis;
 
         public ViewHolder(View view){
@@ -87,8 +89,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             price=view.findViewById(R.id.Cprice);
             imgProduct=view.findViewById(R.id.Cimg_product);
             quantity=view.findViewById(R.id.Cquantity);
-            inc=view.findViewById(R.id.increase);
-            dec=view.findViewById(R.id.decrease);
+            //inc=view.findViewById(R.id.increase);
+            //dec=view.findViewById(R.id.decrease);
             dis=view.findViewById(R.id.Cquantity);
         }
     }

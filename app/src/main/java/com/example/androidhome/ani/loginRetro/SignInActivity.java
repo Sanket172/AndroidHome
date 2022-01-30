@@ -53,9 +53,16 @@ public class SignInActivity extends AppCompatActivity {
 
         signin.setOnClickListener(view -> {
             if(email.getText().toString().isEmpty() && pwd.getText().toString().isEmpty()){
+
                 Toast.makeText(SignInActivity.this,"Please enter valid details",Toast.LENGTH_SHORT).show();
                 return;
             }
+            SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putString("email",email.getText().toString());
+            editor.apply();
+            String emailView = sharedPreferences.getString("email","sdgf");
+
             loginAPI(email.getText().toString(),pwd.getText().toString());
 
         });
@@ -93,10 +100,11 @@ public class SignInActivity extends AppCompatActivity {
 
     public void loginAPI(String email,String pwd){
 
-        SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("email","a");
+//        SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+//
+//        SharedPreferences.Editor editor=sharedPreferences.edit();
+//        editor.putString("email",email);
+//        editor.apply();
 
 
         Retrofit retrofit= BuilderSignup.getInstance();
@@ -168,7 +176,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 SharedPreferences sharedPreferences1=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences1.edit();
-                editor.putString("email","a");
+                editor.putString("email",personEmail);
                 editor.apply();
 
 

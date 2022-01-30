@@ -18,8 +18,9 @@ public class SureLogout extends AppCompatActivity {
 
         Button btYes=findViewById(R.id.btYes);
         Button btNo=findViewById(R.id.btNo);
+
         btYes.setOnClickListener(view -> {
-            SharedPreferences sharedPreferences=getSharedPreferences("com.example.inkedpages", Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences=getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
             sharedPreferences.edit().clear().commit();
 
             Intent i=new Intent(SureLogout.this,MainActivity.class);

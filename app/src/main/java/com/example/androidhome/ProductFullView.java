@@ -28,6 +28,7 @@ import com.example.androidhome.ani.cartRetro.CartEntity;
 import com.example.androidhome.ani.cartRetro.CartProducts;
 import com.example.androidhome.ani.productRetro.MerchantEntity;
 import com.example.androidhome.ani.productRetro.ProductEntity;
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class ProductFullView extends AppCompatActivity {
     Double price;
     String email;
     Button buynow;
+    Button gotocart;
     //Button gotocart = findViewById(R.id.gotocart);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +74,8 @@ public class ProductFullView extends AppCompatActivity {
         //getProductFullView(productId);
         ProductFullApi(productId);
         addtocart = findViewById(R.id.PFVAddtocart);
-        buynow = findViewById(R.id.gotocart);
-
+        buynow = findViewById(R.id.Buynow);
+        gotocart = findViewById(R.id.gotocart);
         //ProductEntity productEntity = ProductFullApi(productId);
         // merchantId=getIntent().getStringExtra("merchantId");
         //merchantId  = "61f2687110a9f61f1546eed8";
@@ -102,6 +104,12 @@ public class ProductFullView extends AppCompatActivity {
             Log.d("Hellllllllllllooooo", "1SliderAPI");
 
 
+        });
+
+        gotocart.setOnClickListener(view -> {
+
+            Intent intent = new Intent(ProductFullView.this, CartActivity.class);
+            startActivity(intent);
         });
 
         buynow.setOnClickListener(view -> {

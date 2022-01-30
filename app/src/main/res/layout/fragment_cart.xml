@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Ctotal" />
 
     <Button
-        android:id="@+id/placeorder"
+        android:id="@+id/placeorderfragment"
         android:layout_width="170dp"
         android:layout_height="60dp"
         android:text="Place order"

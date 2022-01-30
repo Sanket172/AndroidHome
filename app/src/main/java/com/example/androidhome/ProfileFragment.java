@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidhome.Model.Category;
+import com.example.androidhome.ani.signupRetro.SignUpActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -58,12 +59,15 @@ public class ProfileFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
         return v;
 
+
+
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         view.findViewById(R.id.PAccount).setOnClickListener(view12 -> {
 
@@ -79,7 +83,6 @@ public class ProfileFragment extends Fragment {
         });
 
 
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -88,21 +91,36 @@ public class ProfileFragment extends Fragment {
 
         Button signout = view.findViewById(R.id.logout_fragment);
 
+        Button signout1 = view.findViewById(R.id.logout_fragment1);
+
+
+        signout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SureLogout.class);
+                startActivity(intent);
+            }
+        });
+
+
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Log.d("AAAAAAAAAAAAAAA", "JHello   " + dashboardActivity.lc);
 
                 signOut();
+
             }
         });
 
         GoogleSignInAccount acc = GoogleSignIn.getLastSignedInAccount(getContext());
+
         if(acc!=null)
         {
             String personName = acc.getDisplayName();
             Uri personPhoto = acc.getPhotoUrl();
             String personEmail = acc.getEmail();
+
 
         }
 
@@ -113,20 +131,21 @@ public class ProfileFragment extends Fragment {
 
             Toast.makeText(getContext(), "SignOut FROM this", Toast.LENGTH_SHORT).show();
 
-            SharedPreferences sharedPreferences = dashboardActivity.getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putString("loginchecker", "0");
-            editor.clear();
-            editor.apply();
 
+//            SharedPreferences sharedPreferences = dashboardActivity.getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+////            editor.putString("loginchecker", "0");
+//            editor.clear();
+//            editor.apply();
 
-            Intent intent = new Intent(getContext(), LoginCheckerActivity.class);
-            dashboardActivity.finish();
-
-
+           // dashboardActivity.finish();
+            Intent intent = new Intent(getContext(), SureLogout.class);
             startActivity(intent);
 
+
         });
+
+
     }
 
 

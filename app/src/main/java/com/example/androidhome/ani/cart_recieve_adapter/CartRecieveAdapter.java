@@ -40,6 +40,8 @@ public class CartRecieveAdapter extends RecyclerView.Adapter<CartRecieveAdapter.
     private Context context;
     String productId;
     double Total;
+    int count = 0;
+
 
     public CartRecieveAdapter(List<CartProducts> mcartProducts, CartDataInterface mcartDataInterface, Context context) {
         this.mcartProducts = mcartProducts;
@@ -77,47 +79,42 @@ public class CartRecieveAdapter extends RecyclerView.Adapter<CartRecieveAdapter.
             mcartDataInterface.onUserClick(cartProducts);
         });
 
-        final int[] count = {0};
-
         holder.inc.setOnClickListener(v -> {
 
-
             //CartQuantityAPI(email, productId, cartProducts.getQuantity(), cartProducts.getMerchantId());
-            SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.e_mobile", Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.androidhome", Context.MODE_PRIVATE);
             email = sharedPreferences.getString("email", "Default");
 
             productId = cartProducts.getProductId();
-            Long in = CartQuantityAPI(productId, cartProducts.getMerchantId());
+            //Long in = CartQuantityAPI(productId, cartProducts.getMerchantId());
 
-            if(count[0] < in)
+            if(count < 100)
             {
-                count[0]++;
+                count++;
 
             }
             else
             {
                 Toast.makeText(context, "Stock Not Available", Toast.LENGTH_SHORT).show();
             }
-            holder.dis.setText("" + count[0]);
-
             holder.dis.setText("" + count);
+
         });
 
         holder.dec.setOnClickListener(v -> {
 
-            count[0]--;
-            if(count[0] > 0)
+            count--;
+            if(count > 0)
             {
-                count[0]--;
+                count--;
             }
             else
             {
-                count[0] =0;
+                count =0;
             }
 
-            holder.dis.setText("" + count[0]);
-
             holder.dis.setText("" + count);
+
         });
     }
 

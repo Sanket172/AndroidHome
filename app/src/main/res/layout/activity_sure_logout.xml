@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Logout">
-
+    tools:context=".SureLogout">
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -15,11 +11,9 @@
         android:text="Sure you want to log out?"
         android:textColor="@color/black"
         android:textSize="18dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btNo"
         android:layout_width="100dp"
@@ -32,7 +26,6 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toEndOf="@+id/btYes"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
     <Button
         android:id="@+id/btYes"
         android:layout_width="100dp"
@@ -40,8 +33,8 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/ourlogo"
-        android:text="yes"
         android:textColor="@color/white"
+        android:text="yes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 </androidx.constraintlayout.widget.ConstraintLayout>
