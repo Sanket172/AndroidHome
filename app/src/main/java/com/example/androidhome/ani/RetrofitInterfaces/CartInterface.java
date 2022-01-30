@@ -26,7 +26,6 @@ public interface CartInterface {
         @GET("/cart/get/{mail}")
         Call<CartRecieveEntity> postLogRecieve(@Path("mail") String mail);
 
-
         @GET("/cart/stock")
         Call<Long> postLogGetQty(@Body CartQuantityChecker cartQuantityChecker);
 

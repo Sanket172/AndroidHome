@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.example.androidhome.DashboardActivity;
 import com.example.androidhome.R;
+import com.example.androidhome.ani.RetrofitInterfaces.SignupInterface;
 import com.example.androidhome.ani.signupRetro.SignUpActivity;
 import com.example.androidhome.SplashActivity;
 import com.example.androidhome.ani.builder.BuilderSignup;
 import com.example.androidhome.ani.signupRetro.Respentity;
+import com.example.androidhome.ani.signupRetro.SignupEntity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -178,6 +180,36 @@ public class SignInActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor=sharedPreferences1.edit();
                 editor.putString("email",personEmail);
                 editor.apply();
+
+                //-------------------------------------------------------------------------------------
+
+                Retrofit retrofit = BuilderSignup.getInstance();
+                SignupEntity signupEntity = new SignupEntity(personName, personEmail, "", "Home Address");
+
+                SignupInterface signupInterface = retrofit.create(SignupInterface.class);
+
+                Call<Respentity> signupEntityCall = signupInterface.postLogGoogle(signupEntity);
+                signupEntityCall.enqueue(new Callback<Respentity>() {
+                    @Override
+                    public void onResponse(Call<Respentity> call, Response<Respentity> response) {
+                        if(response.body()==null){
+                            Toast.makeText(SignInActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+                        }
+
+                        Toast.makeText(SignInActivity.this, "Signin Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignInActivity.this, SplashActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Respentity> call, Throwable t) {
+                        Toast.makeText(SignInActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //------------------------------------------------------------------------------------------------------
+
 
 
                 SharedPreferences.Editor editor1 = sharedPreferences.edit();

@@ -176,14 +176,40 @@ public class SignUpActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor=sharedPreferences1.edit();
                 editor.putString("email", personEmail);
                 editor.apply();
+                //-------------------------------------------------------------------------------------
+
+                Retrofit retrofit = BuilderSignup.getInstance();
+                SignupEntity signupEntity = new SignupEntity(personName, personEmail, "", "Home Address");
+
+                SignupInterface signupInterface = retrofit.create(SignupInterface.class);
+
+                Call<Respentity> signupEntityCall = signupInterface.postLogGoogle(signupEntity);
+                signupEntityCall.enqueue(new Callback<Respentity>() {
+                    @Override
+                    public void onResponse(Call<Respentity> call, Response<Respentity> response) {
+                        if(response.body()==null){
+                            Toast.makeText(SignUpActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+                        }
+
+                        Toast.makeText(SignUpActivity.this, "Signin Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignUpActivity.this, SplashActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Respentity> call, Throwable t) {
+                        Toast.makeText(SignUpActivity.this, "User mail is already registered", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //------------------------------------------------------------------------------------------------------
 
                 Log.d("ABCDEFGH", "User Email :- "+personEmail);
                 Toast.makeText(this, "User ID :- "+personEmail, Toast.LENGTH_SHORT ).show();
                 startActivity(new Intent(SignUpActivity.this, SplashActivity.class));
 
             }
-
-
 
 
             // Signed in successfully, show authenticated UI.
